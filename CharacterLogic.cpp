@@ -1,10 +1,27 @@
 
 
+#include <iostream>
 #include "CharacterLogic.h"
 CharacterLogic::CharacterLogic() {
-    this -> actualPosition = std::make_pair(10, 15);
+    this -> actualPosition = std::make_pair(9, 1);
+    //jump();
+
 }
 
 std::pair<unsigned int, unsigned int> CharacterLogic::getActualPosition() const{
     return this -> actualPosition;
+}
+
+std::pair<unsigned int, unsigned int> CharacterLogic::getFuturePosition() const{
+    return this -> futurePosition;
+}
+
+void CharacterLogic::jump(){
+    this -> actualPosition.second--;
+    std::cout << "jumping" << std::endl;
+}
+
+void CharacterLogic::setActualPosition(std::pair<int, int> position){
+
+    actualPosition = position;
 }

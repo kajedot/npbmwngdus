@@ -11,10 +11,15 @@
 class CharacterLogic {
     private:
     std::pair<unsigned int, unsigned int> actualPosition;
+    std::pair<unsigned int, unsigned int> futurePosition;
 
     public:
     CharacterLogic();
     std::pair<unsigned int, unsigned int> getActualPosition() const;
+    std::pair<unsigned int, unsigned int> getFuturePosition() const;
+
+    void jump();
+    void setActualPosition(std::pair<int, int> positionToLand);
 };
 
 

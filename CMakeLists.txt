@@ -8,7 +8,7 @@ find_package(SFML  REQUIRED graphics window system)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(npbmwngdus main.cpp EnvironmentView.cpp EnvironmentView.h GameWindow.cpp GameWindow.h CharacterLogic.cpp CharacterLogic.h GameManager.cpp GameManager.h)
+add_executable(npbmwngdus main.cpp WindowView.cpp WindowView.h CharacterLogic.cpp CharacterLogic.h GameManager.cpp GameManager.h EnvironmentLogic.cpp EnvironmentLogic.h)
 
 if(SFML_FOUND)
     include_directories(${SFML_INCLUDE_DIR})

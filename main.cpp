@@ -1,9 +1,12 @@
 #include <iostream>
-#include "GameWindow.h"
+#include "GameManager.h"
 
 int main() {
 
-    GameWindow mainWindow;
+    // create object
+    GameManager mainManager;
+    // start window
+    mainManager.windowLoop();
 
     return 0;
 }
