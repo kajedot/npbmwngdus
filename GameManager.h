@@ -18,20 +18,10 @@ class GameManager {
     CharacterLogic mainCharacterLogic;
     WindowView mainWindowView;
     EnvironmentLogic mainEnvironmentLogic;
-    bool isNegativeNumber(int in);
 
     void windowEventsManager(sf::RenderWindow &window, sf::Event &event);
 
-    void fallingManager(sf::RenderWindow &window);
-
-    void jumpingEvent(sf::RenderWindow &window);
-
-    void cloudsManager(sf::RenderWindow &window);
-
-    void collisionManager(sf::RenderWindow &window);
-
-
-
+    void collisionManager();
 
 public:
     GameManager();

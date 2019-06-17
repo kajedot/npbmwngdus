@@ -5,7 +5,8 @@
 #ifndef NPBMWNGDUS_CHARACTERLOGIC_H
 #define NPBMWNGDUS_CHARACTERLOGIC_H
 
-
+#include "EnvironmentLogic.h"
+#include <iostream>
 #include <utility>
 
 class CharacterLogic {
@@ -17,6 +18,10 @@ class CharacterLogic {
     CharacterLogic();
     std::pair<unsigned int, unsigned int> getActualPosition() const;
     std::pair<unsigned int, unsigned int> getFuturePosition() const;
+
+    void fallingManager(EnvironmentLogic &mainEnvironmentLogic);
+
+    void jumpingEvent(EnvironmentLogic &mainEnvironmentLogic);
 
     void jump();
     void setActualPosition(std::pair<int, int> positionToLand);

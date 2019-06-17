@@ -8,21 +8,14 @@ GameManager::GameManager():SFMLWindow(sf::VideoMode(800, 600), "N.P.B.M.W.N.G.D.
     std::cout << "Gathered clouds board size: " << mainEnvironmentLogic.getCloudsBoardWidth() << " x " << mainEnvironmentLogic.getCloudsBoardHeight() << std::endl;
 }
 
-bool GameManager::isNegativeNumber(int in) {
-    if (in < 0)
-        return true;
-    else
-        return false;
-}
-
 void GameManager::windowLoop() {
     while (SFMLWindow.isOpen()) {
         sf::Event event;
         SFMLWindow.clear(sf::Color::Black);
         windowEventsManager(SFMLWindow, event);
-        fallingManager(SFMLWindow);
-        cloudsManager(SFMLWindow);
-        collisionManager(SFMLWindow);
+        mainCharacterLogic.fallingManager(mainEnvironmentLogic);
+        mainEnvironmentLogic.cloudsManager();
+        collisionManager();
         mainWindowView.draw(mainCharacterLogic, mainEnvironmentLogic, SFMLWindow);
         SFMLWindow.display();
         usleep(500000);
@@ -37,56 +30,19 @@ void GameManager::windowEventsManager(sf::RenderWindow &window, sf::Event &event
 
         if (event.type == sf::Event::KeyPressed) {
             if (event.key.code == sf::Keyboard::Space) {
-                jumpingEvent(window);
+                mainCharacterLogic.jumpingEvent(mainEnvironmentLogic);
             }
         }
     }
 }
 
-void GameManager::fallingManager(sf::RenderWindow &window) {
-    std::pair <int, int> characterPosition;
-    characterPosition.first = mainCharacterLogic.getActualPosition().first;
-    characterPosition.second = mainCharacterLogic.getActualPosition().second;
-
-    if(! mainEnvironmentLogic.hasCloud(std::make_pair(characterPosition.first, characterPosition.second+1))) {
-        std::cout << "falling\n";
-        mainCharacterLogic.setActualPosition(std::make_pair(characterPosition.first, characterPosition.second+1));
-    }
-}
-
-void GameManager::jumpingEvent(sf::RenderWindow &window) {
-    std::pair <int, int> characterPosition;
-    characterPosition.first = mainCharacterLogic.getActualPosition().first;
-    characterPosition.second = mainCharacterLogic.getActualPosition().second;
-
-    if(! mainEnvironmentLogic.hasCloud(std::make_pair(characterPosition.first, characterPosition.second-1)) && mainEnvironmentLogic.hasCloud(std::make_pair(characterPosition.first, characterPosition.second+1))) {
-        std::cout << "jumping\n";
-        mainCharacterLogic.setActualPosition(std::make_pair(characterPosition.first, characterPosition.second-4));
-    }
-}
-
-
-void GameManager::cloudsManager(sf::RenderWindow &window) {
-    for (int x = 0; x < mainEnvironmentLogic.getCloudsBoardWidth(); ++x) {
-        for (int y = 0; y < mainEnvironmentLogic.getCloudsBoardHeight(); ++y) {
-            if(mainEnvironmentLogic.hasCloud(std::make_pair(x, y))){
-                if (!isNegativeNumber(x-1)) {
-                    mainEnvironmentLogic.addCloud(std::make_pair(x-1, y));
-                }
-                mainEnvironmentLogic.delCloud(std::make_pair(x, y));
-            }
-        }
-    }
-}
-
-void GameManager::collisionManager(sf::RenderWindow &window) {
+void GameManager::collisionManager() {
     std::pair <unsigned int, unsigned int> characterPosition = mainCharacterLogic.getActualPosition();
 
-            if(mainEnvironmentLogic.hasCloud(std::make_pair(characterPosition.first, characterPosition.second))){
-                std::cout << "Detected collision with cloud\n";
-                if (!isNegativeNumber(characterPosition.first-1)) {
-                    mainCharacterLogic.setActualPosition(std::make_pair(characterPosition.first-1, characterPosition.second));
-                }
-
-            }
+    if(mainEnvironmentLogic.hasCloud(std::make_pair(characterPosition.first, characterPosition.second))){
+        std::cout << "Detected collision with cloud\n";
+        if (! mainEnvironmentLogic.isNegativeNumber(characterPosition.first-1)) {
+            mainCharacterLogic.setActualPosition(std::make_pair(characterPosition.first-1, characterPosition.second));
+        }
+    }
 }

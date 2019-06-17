@@ -20,11 +20,13 @@ public:
 
     EnvironmentLogic(sf::RenderWindow &mainWindow);
 
-    bool hasCloud(std::pair<int, int> position);
+    bool isNegativeNumber(int in);
 
-    void setCurrentCharacterPosition(std::pair<int, int> position);
+    bool hasCloud(std::pair<unsigned int, unsigned int> position);
 
-    void setToBeCharacterPosition(std::pair<int, int> position);
+    void setCurrentCharacterPosition(std::pair<unsigned int, unsigned int> position);
+
+    void setToBeCharacterPosition(std::pair<unsigned int, unsigned int> position);
 
     unsigned int getCloudsBoardWidth() const;
 
@@ -32,7 +34,9 @@ public:
 
     void addCloud(std::pair<unsigned int, unsigned int> position);
 
-    void delCloud(std::pair<int, int> position);
+    void delCloud(std::pair<unsigned int, unsigned int> position);
+
+    void cloudsManager();
 
 
 
