@@ -9,6 +9,8 @@
 #include "CharacterLogic.h"
 #include "EnvironmentLogic.h"
 #include <SFML/Graphics.hpp>
+#include <unistd.h>
+
 
 
 class GameManager {
@@ -16,11 +18,20 @@ class GameManager {
     CharacterLogic mainCharacterLogic;
     WindowView mainWindowView;
     EnvironmentLogic mainEnvironmentLogic;
+    bool isNegativeNumber(int in);
+
     void windowEventsManager(sf::RenderWindow &window, sf::Event &event);
 
     void fallingManager(sf::RenderWindow &window);
 
-    void cloudsDrawingManager(sf::RenderWindow &window);
+    void jumpingEvent(sf::RenderWindow &window);
+
+    void cloudsManager(sf::RenderWindow &window);
+
+    void collisionManager(sf::RenderWindow &window);
+
+
+
 
 public:
     GameManager();

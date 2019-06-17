@@ -26,6 +26,18 @@ public:
 
     void setToBeCharacterPosition(std::pair<int, int> position);
 
+    unsigned int getCloudsBoardWidth() const;
+
+    unsigned int getCloudsBoardHeight() const;
+
+    void addCloud(std::pair<unsigned int, unsigned int> position);
+
+    void delCloud(std::pair<int, int> position);
+
+
+
+
+
 
 };
 

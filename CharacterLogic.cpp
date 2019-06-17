@@ -17,7 +17,7 @@ std::pair<unsigned int, unsigned int> CharacterLogic::getFuturePosition() const{
 }
 
 void CharacterLogic::jump(){
-    this -> actualPosition.second--;
+    this -> actualPosition.second = actualPosition.second +5;
     std::cout << "jumping" << std::endl;
 }
 

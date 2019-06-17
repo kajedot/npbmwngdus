@@ -55,13 +55,16 @@ void WindowView::draw(CharacterLogic &mainLogic, EnvironmentLogic &mainEnvironme
 }
 
 void WindowView::fallingAnimation(std::pair <int, int> positionToLand, CharacterLogic &mainCharacterLogic, sf::RenderWindow &window){
+
+    std::cout << "start falling animation" << std::endl;
+
     std::pair <int, int> characterPosition;
 
     characterPosition.first = mainCharacterLogic.getActualPosition().first;
     characterPosition.second = mainCharacterLogic.getActualPosition().second;
 
     for (int y = characterPosition.second; y < positionToLand.second; ++y) {
-        characterSprite.setPosition(logicToScreenPosition(characterPosition.first), logicToScreenPosition(y));
+        characterSprite.setPosition(characterPosition.first, y);
         window.draw(characterSprite);
     }
 }
@@ -70,7 +73,7 @@ void WindowView::drawCloud(EnvironmentLogic &mainEnvironmentLogic, sf::RenderWin
     for (int x = 0; x < window.getSize().x / 40; ++x) {
         for (int y = 0; y < window.getSize().y / 40; ++y) {
             if (mainEnvironmentLogic.hasCloud(std::make_pair(x, y))) {
-                cloudSprite.setPosition(x,y);//logicToScreenPosition(position.first), logicToScreenPosition(position.second)
+                cloudSprite.setPosition(logicToScreenPosition(x), logicToScreenPosition(y));//
                 window.draw(cloudSprite);
             }
         }
