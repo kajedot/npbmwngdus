@@ -26,6 +26,13 @@ WindowView::WindowView() {
         std::cout << "cloud.png loaded" << std::endl;
     }
     cloudSprite.setTexture(cloudTexture);
+
+    if(!goalTexture.loadFromFile("goal.png")){
+        std::cout << "ERR: goal.png not loaded" << std::endl;
+    }else{
+        std::cout << "goal.png loaded" << std::endl;
+    }
+    goalSprite.setTexture(goalTexture);
 }
 int WindowView::logicToScreenPosition(int logicPosition){
     return logicPosition*40;
@@ -52,22 +59,11 @@ void WindowView::draw(CharacterLogic &mainLogic, EnvironmentLogic &mainEnvironme
     this -> drawBackground(window);
     this -> drawCharacter(mainLogic, window);
     this -> drawCloud(mainEnvironmentLogic, window);
+
+    goalSprite.setPosition(logicToScreenPosition(mainEnvironmentLogic.getCloudsBoardWidth()-1), 1);
+    window.draw(goalSprite);
 }
 
-void WindowView::fallingAnimation(std::pair <int, int> positionToLand, CharacterLogic &mainCharacterLogic, sf::RenderWindow &window){
-
-    std::cout << "start falling animation" << std::endl;
-
-    std::pair <int, int> characterPosition;
-
-    characterPosition.first = mainCharacterLogic.getActualPosition().first;
-    characterPosition.second = mainCharacterLogic.getActualPosition().second;
-
-    for (int y = characterPosition.second; y < positionToLand.second; ++y) {
-        characterSprite.setPosition(characterPosition.first, y);
-        window.draw(characterSprite);
-    }
-}
 
 void WindowView::drawCloud(EnvironmentLogic &mainEnvironmentLogic, sf::RenderWindow &window){
     for (int x = 0; x < window.getSize().x / 40; ++x) {

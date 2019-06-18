@@ -21,25 +21,40 @@ void CharacterLogic::setActualPosition(std::pair<int, int> position){
 }
 
 void CharacterLogic::fallingManager(EnvironmentLogic &mainEnvironmentLogic) {
-    std::pair <int, int> characterPosition;
-    characterPosition.first = getActualPosition().first;
-    characterPosition.second = getActualPosition().second;
 
-    if(! mainEnvironmentLogic.hasCloud(std::make_pair(characterPosition.first, characterPosition.second+1))) {
+    if(! mainEnvironmentLogic.hasCloud(std::make_pair(actualPosition.first, actualPosition.second+1))) {
         std::cout << "falling\n";
-        actualPosition = std::make_pair(characterPosition.first, characterPosition.second+1);
+        actualPosition = std::make_pair(actualPosition.first, actualPosition.second+1);
     }
 }
 
-void CharacterLogic::jumpingEvent(EnvironmentLogic &mainEnvironmentLogic) {
-    std::pair <int, int> characterPosition;
-    characterPosition.first = actualPosition.first;
-    characterPosition.second = actualPosition.second;
-
-    if(! mainEnvironmentLogic.hasCloud(std::make_pair(characterPosition.first, characterPosition.second-1))
-    && mainEnvironmentLogic.hasCloud(std::make_pair(characterPosition.first, characterPosition.second+1))) {
+void CharacterLogic::jump(EnvironmentLogic &mainEnvironmentLogic) {
+    if(! mainEnvironmentLogic.hasCloud(std::make_pair(actualPosition.first, actualPosition.second-1))
+    && mainEnvironmentLogic.hasCloud(std::make_pair(actualPosition.first, actualPosition.second+1))) {
         std::cout << "jumping\n";
-        actualPosition = std::make_pair(characterPosition.first, characterPosition.second-3);
+        actualPosition = std::make_pair(actualPosition.first, actualPosition.second-3);
     }
 }
 
+void CharacterLogic::moveRight(EnvironmentLogic &mainEnvironmentLogic) {
+    if(! mainEnvironmentLogic.hasCloud(std::make_pair(actualPosition.first+1, actualPosition.second))) {
+        std::cout << "moving right\n";
+        actualPosition = std::make_pair(actualPosition.first+1, actualPosition.second);
+    }
+}
+
+void CharacterLogic::moveLeft(EnvironmentLogic &mainEnvironmentLogic) {
+    if(! mainEnvironmentLogic.hasCloud(std::make_pair(actualPosition.first-1, actualPosition.second))) {
+        std::cout << "moving left\n";
+        actualPosition = std::make_pair(actualPosition.first-1, actualPosition.second);
+    }
+}
+
+bool CharacterLogic::isDead(EnvironmentLogic &mainEnvironmentLogic) const{
+
+    if(actualPosition.first == 0 || actualPosition.second == mainEnvironmentLogic.getCloudsBoardHeight())
+        return true;
+    else
+        return false;
+
+}

@@ -15,6 +15,7 @@
 
 class GameManager {
     sf::RenderWindow SFMLWindow;
+    sf::Event event;
     CharacterLogic mainCharacterLogic;
     WindowView mainWindowView;
     EnvironmentLogic mainEnvironmentLogic;
@@ -22,6 +23,8 @@ class GameManager {
     void windowEventsManager(sf::RenderWindow &window, sf::Event &event);
 
     void collisionManager();
+
+    void lifeManager(sf::RenderWindow &window);
 
 public:
     GameManager();

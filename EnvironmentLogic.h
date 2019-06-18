@@ -7,9 +7,12 @@
 
 #include <vector>
 #include "SFML/Graphics.hpp"
-#include "utility"
+#include <utility>
+#include <random>
+#include <iostream>
 
-enum Field{CHARACTER_CURRENT, CHARACTER_TO_BE, CLOUD, AIR};
+
+enum Field{CLOUD, AIR};
 
 class EnvironmentLogic {
 
@@ -18,15 +21,15 @@ class EnvironmentLogic {
 public:
     std::vector < std::vector <Field> > gameBoard;
 
-    EnvironmentLogic(sf::RenderWindow &mainWindow);
+    explicit EnvironmentLogic(sf::RenderWindow &mainWindow);
 
     bool isNegativeNumber(int in);
 
-    bool hasCloud(std::pair<unsigned int, unsigned int> position);
+    unsigned int randomNumberInRange(int from, int to);
 
-    void setCurrentCharacterPosition(std::pair<unsigned int, unsigned int> position);
+    bool hasCloud(std::pair<unsigned int, unsigned int> position) const;
 
-    void setToBeCharacterPosition(std::pair<unsigned int, unsigned int> position);
+    unsigned int countClouds() const;
 
     unsigned int getCloudsBoardWidth() const;
 
@@ -36,10 +39,9 @@ public:
 
     void delCloud(std::pair<unsigned int, unsigned int> position);
 
-    void cloudsManager();
+    void cloudsAtLeftBorder();
 
-
-
+    void cloudsAtRightBorder();
 
 
 

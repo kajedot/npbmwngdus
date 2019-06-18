@@ -3,6 +3,8 @@
 
 int main() {
 
+
+
     // create object
     GameManager mainManager;
     // start window

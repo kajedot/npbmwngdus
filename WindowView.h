@@ -14,11 +14,14 @@ class WindowView {
     sf::Texture backgroundTexture;
     sf::Texture characterTexture;
     sf::Texture cloudTexture;
+    sf::Texture goalTexture;
+
 
 
     sf::Sprite backgroundSprite;
     sf::Sprite characterSprite;
     sf::Sprite cloudSprite;
+    sf::Sprite goalSprite;
 
 
     int logicToScreenPosition(int logicPosition);
@@ -29,7 +32,6 @@ class WindowView {
 public:
     WindowView();
     void draw(CharacterLogic &mainLogic, EnvironmentLogic &mainEnvironmentLogic, sf::RenderWindow &window);
-    void fallingAnimation(std::pair <int, int> positionToLand, CharacterLogic &mainCharacterLogic, sf::RenderWindow &window);
     void drawCloud(EnvironmentLogic &mainEnvironmentLogic, sf::RenderWindow &window);
 };
 

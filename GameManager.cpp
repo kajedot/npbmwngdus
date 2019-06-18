@@ -10,15 +10,18 @@ GameManager::GameManager():SFMLWindow(sf::VideoMode(800, 600), "N.P.B.M.W.N.G.D.
 
 void GameManager::windowLoop() {
     while (SFMLWindow.isOpen()) {
-        sf::Event event;
         SFMLWindow.clear(sf::Color::Black);
+
         windowEventsManager(SFMLWindow, event);
-        mainCharacterLogic.fallingManager(mainEnvironmentLogic);
-        mainEnvironmentLogic.cloudsManager();
-        collisionManager();
         mainWindowView.draw(mainCharacterLogic, mainEnvironmentLogic, SFMLWindow);
         SFMLWindow.display();
-        usleep(500000);
+        mainCharacterLogic.fallingManager(mainEnvironmentLogic);
+        mainEnvironmentLogic.cloudsAtRightBorder();
+        mainEnvironmentLogic.cloudsAtLeftBorder();
+        collisionManager();
+        lifeManager(SFMLWindow);
+
+        usleep(100000);
 
     }
 }
@@ -30,7 +33,15 @@ void GameManager::windowEventsManager(sf::RenderWindow &window, sf::Event &event
 
         if (event.type == sf::Event::KeyPressed) {
             if (event.key.code == sf::Keyboard::Space) {
-                mainCharacterLogic.jumpingEvent(mainEnvironmentLogic);
+                mainCharacterLogic.jump(mainEnvironmentLogic);
+            }
+
+            if (event.key.code == sf::Keyboard::Left) {
+                mainCharacterLogic.moveLeft(mainEnvironmentLogic);
+            }
+
+            if (event.key.code == sf::Keyboard::Right) {
+                mainCharacterLogic.moveRight(mainEnvironmentLogic);
             }
         }
     }
@@ -44,5 +55,13 @@ void GameManager::collisionManager() {
         if (! mainEnvironmentLogic.isNegativeNumber(characterPosition.first-1)) {
             mainCharacterLogic.setActualPosition(std::make_pair(characterPosition.first-1, characterPosition.second));
         }
+    }
+}
+
+void GameManager::lifeManager(sf::RenderWindow &window) {
+    if(mainCharacterLogic.isDead(mainEnvironmentLogic)){
+        std::cout << "Game over\n";
+        window.close();
+
     }
 }

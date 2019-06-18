@@ -21,10 +21,16 @@ class CharacterLogic {
 
     void fallingManager(EnvironmentLogic &mainEnvironmentLogic);
 
-    void jumpingEvent(EnvironmentLogic &mainEnvironmentLogic);
+    void jump(EnvironmentLogic &mainEnvironmentLogic);
 
-    void jump();
+    void moveLeft(EnvironmentLogic &mainEnvironmentLogic);
+
+    void moveRight(EnvironmentLogic &mainEnvironmentLogic);
+
     void setActualPosition(std::pair<int, int> positionToLand);
+
+    bool isDead(EnvironmentLogic &mainEnvironmentLogic) const;
+
 };
 
 
