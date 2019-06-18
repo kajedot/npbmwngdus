@@ -26,6 +26,9 @@ class GameManager {
 
     void lifeManager(sf::RenderWindow &window);
 
+    void winManager(EnvironmentLogic &mainEnvironmentLogic, sf::RenderWindow &window);
+
+
 public:
     GameManager();
     void windowLoop();

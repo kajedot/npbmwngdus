@@ -31,6 +31,7 @@ class CharacterLogic {
 
     bool isDead(EnvironmentLogic &mainEnvironmentLogic) const;
 
+
 };
 
 

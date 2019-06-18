@@ -20,6 +20,7 @@ void GameManager::windowLoop() {
         mainEnvironmentLogic.cloudsAtLeftBorder();
         collisionManager();
         lifeManager(SFMLWindow);
+        winManager(mainEnvironmentLogic, SFMLWindow);
 
         usleep(100000);
 
@@ -62,6 +63,15 @@ void GameManager::lifeManager(sf::RenderWindow &window) {
     if(mainCharacterLogic.isDead(mainEnvironmentLogic)){
         std::cout << "Game over\n";
         window.close();
+
+    }
+}
+
+void GameManager::winManager(EnvironmentLogic &mainEnvironmentLogic, sf::RenderWindow &window) {
+    if(mainCharacterLogic.getActualPosition().first == mainEnvironmentLogic.getCloudsBoardWidth()-1 && mainCharacterLogic.getActualPosition().second == 1){
+        std::cout << "You win!!!\n";
+        window.close();
+
 
     }
 }

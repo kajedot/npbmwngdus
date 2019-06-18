@@ -58,3 +58,4 @@ bool CharacterLogic::isDead(EnvironmentLogic &mainEnvironmentLogic) const{
         return false;
 
 }
+
